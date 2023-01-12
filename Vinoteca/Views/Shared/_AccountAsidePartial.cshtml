@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">@User.Identity.Name </div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Account" asp-action="AccountDetails" class="list-group-item list-group-item-action bg-light">Perfil</a>
+                @if (User.IsInRole("User") && !User.IsInRole("Bodeguero"))
+                {
+                    <a asp-controller="Account" asp-action="Bodeguero" class="list-group-item list-group-item-action bg-light">Hacerse Vendedor</a>
+                }
+                else if (User.IsInRole("Bodeguero"))
+                {
+                <a asp-controller="Vinos" asp-action="Create" class="list-group-item list-group-item-action bg-light">Vender Vino</a>
+                <a asp-controller="Vinos" asp-action="IndexUser" class="list-group-item list-group-item-action bg-light">Vinos a la venta</a>
+                }
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,61 @@
+﻿@model NewUserViewModel
+@{
+    ViewData["Title"] = "Nueva cuenta";
+}
+<div class="col-md-6 offset-3">
+    <h2>@ViewBag.Title</h2>
+    <br />
+    <section id="loginForm">
+        <form asp-controller="Account" asp-action="NewUser" asp-antiforgery="true" asp-route-returnurl="@ViewData["ReturnUrl"]"
+              method="post" class="form-horizontal">
+            <h4>Nueva cuenta</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User"></label>
+                <input asp-for="User" class="form-control" />
+                <span asp-validation-for="User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword"
+                      class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Crear cuenta</button>
+            </div>
+        </form>
+    </section>
+</div>
+@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

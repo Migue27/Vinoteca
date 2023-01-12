@@ -1,0 +1,92 @@
+﻿@model Vinoteca.Models.Vino
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h3>¿Estas seguro de querer eliminar este vino?</h3>
+<div>
+    <h4>Vino</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DenominacionOrigen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DenominacionOrigen.Denominacion)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoVino)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoVino)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Anada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Anada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EdadVino)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EdadVino)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Alcohol)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Alcohol)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Azucar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Azucar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidades)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidades)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationUserId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationUserId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="IndexUser">Volver</a>
+    </form>
+</div>

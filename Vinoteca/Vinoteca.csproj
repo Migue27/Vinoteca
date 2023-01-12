@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Vinoteca-14DF3146-E39E-42DC-8FD0-157F85576704</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210308174451_InitialCreateWithAppUser.cs" />
+    <Compile Remove="Data\Migrations\20210308174451_InitialCreateWithAppUser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210308175343_2Attempt.cs" />
+    <Compile Remove="Data\Migrations\20210308175343_2Attempt.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210308175816_InitialCreateIdentity.cs" />
+    <Compile Remove="Data\Migrations\20210308175816_InitialCreateIdentity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210308184802_2Attempt.cs" />
+    <Compile Remove="Data\Migrations\20210308184802_2Attempt.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210308191037_InitilizeAdmin.cs" />
+    <Compile Remove="Data\Migrations\20210308191037_InitilizeAdmin.Designer.cs" />
+    <Compile Remove="Migrations\20210308191905_InitialCreate.cs" />
+    <Compile Remove="Migrations\20210308191905_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20210309112714_VinoModelFixed.cs" />
+    <Compile Remove="Migrations\20210309112714_VinoModelFixed.Designer.cs" />
+    <Compile Remove="Migrations\20210309114117_VinoUserFixed.cs" />
+    <Compile Remove="Migrations\20210309114117_VinoUserFixed.Designer.cs" />
+    <Compile Remove="Migrations\20210309114438_InitialCreate.cs" />
+    <Compile Remove="Migrations\20210309114438_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20210309180415_TestEF.cs" />
+    <Compile Remove="Migrations\20210309180415_TestEF.Designer.cs" />
+    <Compile Remove="Migrations\20210309184427_Users.cs" />
+    <Compile Remove="Migrations\20210309184427_Users.Designer.cs" />
+    <Compile Remove="Migrations\20210309190042_FixingUsers.cs" />
+    <Compile Remove="Migrations\20210309190042_FixingUsers.Designer.cs" />
+  </ItemGroup>
+  <!--SI NO FUNCIONA QUITAR ESTO-->
+  <!--<PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>-->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Images\Products\" />
+    <Folder Include="Images\UserProfile\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>

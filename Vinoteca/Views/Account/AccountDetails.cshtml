@@ -1,0 +1,66 @@
+﻿@model Vinoteca.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+<h2>Perfil</h2>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre de Usuario
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-2">
+            Teléfono
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        @if (User.IsInRole("Bodeguero"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NombreBodega)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NombreBodega)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cif)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cif)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-controller="Account" asp-action="AccountEdit" asp-route-id="@Model.Id">Editar</a>
+</div>

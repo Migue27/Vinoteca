@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Vinoteca.Models.Vino>
+
+@{
+    ViewData["Title"] = "Catálogo";
+}
+
+<h1>Catálogo</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DenominacionOrigen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoVino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EdadVino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alcohol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DenominacionOrigen.Denominacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoVino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Anada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EdadVino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alcohol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio) €
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">Detalle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
