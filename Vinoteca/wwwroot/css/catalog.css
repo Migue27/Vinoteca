@@ -1,0 +1,70 @@
+﻿.catalog-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px 5% 15px 5%;
+    justify-content: center;
+
+}
+
+.item-container {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border: 1px solid;
+    border-color: #660036;
+    border-radius: 5px;
+    padding: 10px 10px 0px 10px;
+    margin: 11px;
+    /*TRANSFORM SCALE*/
+    transition: all 0.2s ease-in-out;
+}
+
+    .item-container:hover {
+        transform: scale(1.1);
+        border: 1px solid;
+        border-color: #8b0000;
+        border-radius: 5px;
+    }
+
+.image-container {
+    width: 185px;
+    height: 275px;
+    display: flex;
+    justify-content:center;
+}
+
+.image {
+
+    max-width: 185px;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.container-info{
+    margin: 3px 0 5px 5px;
+}
+
+.vino-name-text, .denominacion-text, .price {
+    color: #333333;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+.vino-name-text {
+    text-align:center;
+    font-weight: bold; 
+    font-size: 1.2em; 
+}
+
+.price {
+    font-weight: bold;
+}
+
+.item-container :hover {
+    text-decoration: none;
+}
+

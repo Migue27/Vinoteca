@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Vinoteca.Models
 {
     public class Vino
     {
+      
         public int ID { get; set; }
 
         [Required(ErrorMessage ="Debe introducir el nombre del vino")]
@@ -20,7 +25,7 @@ namespace Vinoteca.Models
         [EnumDataType(typeof(TipoVino))]
         public TipoVino TipoVino { get; set; }
         [Display(Name = "Añada")]
-        [Range(1800,2021)]
+        [Range(1800, 2023)]
         public int Anada { get; set; }
         [Display(Name = "Edad del vino")]
         [Required(ErrorMessage ="Seleccione la edad del vino")]
@@ -43,11 +48,14 @@ namespace Vinoteca.Models
         [Required(ErrorMessage ="Introduzca el precio unitario")]
         [RegularExpression(@"^[0-9]+.?\d{0,2}$", ErrorMessage ="El precio debe tener solo 2 decimales")]
         [Range(0 , 999999.99, ErrorMessage ="El precio debe ser un valor entre 0 y 1.000.000 €")]
+        [Column(TypeName = "decimal(8,2)")]
         public decimal Precio { get; set; }
         [Display(Name ="Descripción")]
         [MaxLength(1000, ErrorMessage ="La descripción no puede tener más de 1000 caracteres")]
         public string Descripcion { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
+        [Required]
+        public string VinoPath { get; set; }
     }
 }

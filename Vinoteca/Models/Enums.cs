@@ -8,6 +8,7 @@ namespace Vinoteca.Models
 {
     public enum EdadVino
     {
+        Joven,
         [Display(Name ="Semi Crianza")]
         SemiCrianza,
         Crianza,

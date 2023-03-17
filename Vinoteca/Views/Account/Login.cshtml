@@ -3,14 +3,15 @@
     ViewBag.Title = "Iniciar sesión"; 
     }
 
-<div class="col-md-6 offset-3">
-    <h2>@ViewBag.Title</h2>
-    <br />
+<div class="col-xl-4 col-md-6 col-sm-12 login-container">
+    <div class="logo-container">
+    <img src="~/images/logo.png" alt="logo" class="logo-image" />
+    </div>
     <p>Usuario: "Prueba"  Pass: "Prueba123"</p>
     <section id="loginForm">
         <form asp-controller="Account" asp-action="Login" asp-antiforgery="true" asp-route-returnurl="@ViewData["ReturnUrl"]"
               method="post" class="form-horizontal">
-            <hr />
+            
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="User"></label>
@@ -23,18 +24,20 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="checkbox">
+                <div class="custom-checkbox-container">
+                    <input asp-for="RememberMe" />
                     <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" /> @Html.DisplayNameFor(m => m.RememberMe)
+                         @Html.DisplayNameFor(m => m.RememberMe)
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
+            <div class="form-group d-flex justify-content-center">
+                <button type="submit" class="btn custom-btn-primary">
                     <i class="fas fa-sign-in-alt"></i> Iniciar sesión
                 </button>
             </div>
         </form>
     </section>
+
 </div>
 @section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

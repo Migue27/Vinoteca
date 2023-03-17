@@ -5,11 +5,11 @@
     ViewData["Title"] = "Bodeguero";
 }
 
-<h1>Hacerse vendedor</h1>
+<h1 class="main-title">Vender vinos</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<hr class="main-hr" />
+
+    <div class="col-xl-4 col-md-6 col-sm-12 login-container">
         <form asp-controller="Account" asp-action="Bodeguero" asp-antiforgery="true" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             @*<input type="hidden" asp-for="Id" />*@
@@ -23,12 +23,11 @@
                 <input asp-for="Cif" class="form-control" />
                 <span asp-validation-for="Cif" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+            <div class="form-group mt-4">
+                <input type="submit" value="Registrarse" class="btn custom-btn-primary" />
             </div>
         </form>
     </div>
-</div>
 
 
 @section Scripts {

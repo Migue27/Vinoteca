@@ -13,11 +13,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Vinoteca.Models;
+using Vinoteca.Controllers;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace Vinoteca
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +37,9 @@ namespace Vinoteca
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
+
+            //Dependency injection for imageController
+            services.AddScoped<ImagesController>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -56,7 +62,8 @@ namespace Vinoteca
             //IDENTITY POR DEFECTO
             //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 
@@ -87,7 +94,7 @@ namespace Vinoteca
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vinos}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
             InitializeData.SeedData(userManager, roleManager);

@@ -19,7 +19,7 @@ namespace Vinoteca.Models
         
         public bool Bodeguero { get; set; }
 
-        //public string? ProfilePicturePath { get; set; }
+        public string? ProfilePicturePath { get; set; }
 
         //PROPIOS USUARIOS
         public List<Pedido> Pedidos { get; set; }

@@ -20,11 +20,15 @@ namespace Vinoteca.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
+        //To use dependency injection for manage user
+        private readonly ImagesController _imagesController;
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ImagesController imagesController)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
             _context = context;
+            _imagesController = imagesController;
         }
 
         [HttpGet]
@@ -67,7 +71,7 @@ namespace Vinoteca.Controllers
                     }
                     else
                     {
-                        return RedirectToAction(nameof(AccountDetails));
+                        return RedirectToAction("Index", "Vinos");
                     }
 
                 }
@@ -77,13 +81,14 @@ namespace Vinoteca.Controllers
                     return View(model);
                 }
             }
+
             return View(model);
         }
 
         [HttpGet]
         public ActionResult NewUser()
         {
-
+            
             return View();
         }
 
@@ -97,6 +102,8 @@ namespace Vinoteca.Controllers
                 var checkEmail = await _userManager.FindByEmailAsync(newUser.Email);
                 if (checkUser == null && checkEmail == null)
                 {
+                    
+
                     var user = new ApplicationUser
                     {
                         UserName = newUser.User,
@@ -106,6 +113,23 @@ namespace Vinoteca.Controllers
                         Direccion = newUser.Direccion,
                         PhoneNumber = newUser.PhoneNumber,
                     };
+                    string imagePath="";
+                    if (newUser.ImageProfile != null)
+                    {
+                        //TODO: complete with ChatGPT info and 
+                        //https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-7.0
+                        //This doesn't work with MVC
+                        //https://learn.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/9-working-with-images
+
+                        IActionResult resp = await _imagesController.UploadProfileImage(newUser.ImageProfile, user);
+                        if (resp is OkObjectResult result)
+                        {
+                            imagePath = result.Value as string;
+                        }
+                    }
+
+                    user.ProfilePicturePath = imagePath;
+
                     await _userManager.CreateAsync(user, newUser.Password);
                     await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("AccountDetails");
@@ -148,6 +172,11 @@ namespace Vinoteca.Controllers
             {
                 return NotFound();
             }
+
+            //DO IT WITH VIEWMODEL
+            ViewBag.ProfileImage = !String.IsNullOrEmpty(user.ProfilePicturePath) ? "/images" + user.ProfilePicturePath : "/images/Default_profile_image.png";
+            //user.ProfilePicturePath != null || user.ProfilePicturePath != "" ? "/images" + user.ProfilePicturePath : "/images/Default_profile_image.png";
+
             return View(user);
         }
 
@@ -156,11 +185,24 @@ namespace Vinoteca.Controllers
         [HttpGet]
         public async Task<IActionResult> AccountEdit(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
+            var model = await _userManager.FindByIdAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
+
+            EditUserViewModel user = new EditUserViewModel();
+            user.Email = model.Email;
+            user.Id = model.Id;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Nombre = model.Nombre;
+            user.Apellidos = model.Apellidos;
+            user.Direccion = model.Direccion;
+
+            user.NombreBodega = model.NombreBodega;
+            user.Cif = model.Cif;
+
+            ViewBag.ProfileImage = !String.IsNullOrEmpty(model.ProfilePicturePath) ? "/images"+model.ProfilePicturePath : "/images/Default_profile_image.png";
 
             return View(user);
 
@@ -170,13 +212,15 @@ namespace Vinoteca.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User, Bodeguero, Admin")]
-        public async Task<IActionResult> AccountEdit(string Id, [Bind("Id,Nombre,Apellidos,Email,Direccion,PhoneNumber")] ApplicationUser user)
+        public async Task<IActionResult> AccountEdit(string Id, [Bind("Id,Nombre,Apellidos,Email,Direccion,PhoneNumber,NombreBodega,Cif,ImageProfile")] EditUserViewModel user)
         {
 
             if (user.Id != Id)
             {
                 return NotFound();
             }
+            //TODO: MODELSTATE.IsValid return false by nickname that is null check newusercontroller
+
 
             if (ModelState.IsValid)
             {
@@ -186,7 +230,21 @@ namespace Vinoteca.Controllers
                     try
                     {
                         var oldUser = await _userManager.FindByIdAsync(user.Id);
+                        string imagePath ="";
+                        if (user.ImageProfile != null)
+                        {
+                            IActionResult resp = await _imagesController.UploadProfileImage(user.ImageProfile, oldUser);
+                            //ImagesController image = new ImagesController(_userManager);
+                            //IActionResult resp = await image.UploadProfileImage(user.ImageProfile);
+                            if (resp is OkObjectResult result)
+                            {
+                                imagePath = result.Value as string;
+                            }
+                        }
+
+                        
                         //oldUser.Id = user.Id;
+                        
                         oldUser.Nombre = user.Nombre;
                         oldUser.Apellidos = user.Apellidos;
                         oldUser.Email = user.Email;
@@ -194,6 +252,14 @@ namespace Vinoteca.Controllers
                         oldUser.PhoneNumber = user.PhoneNumber;
                         oldUser.NombreBodega = user.NombreBodega;
                         oldUser.Cif = user.Cif;
+                        if(imagePath.Length >0)
+                        oldUser.ProfilePicturePath = imagePath;
+                        if(oldUser.Bodeguero)
+                        {
+                            oldUser.NombreBodega = user.NombreBodega;
+                            oldUser.Cif = user.Cif;
+                        }
+
                         await _userManager.UpdateAsync(oldUser);
 
                     }
@@ -215,6 +281,16 @@ namespace Vinoteca.Controllers
                     ModelState.AddModelError("Email", "El correo ya está registrado");
                 }
 
+            }
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
             }
             return View(user);
         }
@@ -258,12 +334,9 @@ namespace Vinoteca.Controllers
                     await _userManager.UpdateAsync(user);
                     return View(model);
                 }
-                //await _userManager.RemoveFromRolesAsync(user.Id, User);
+
                 await _signInManager.RefreshSignInAsync(user);
                 return RedirectToAction("Create", "Vinos");
-                //await _signInManager.SignOutAsync();
-                //return RedirectToAction(nameof(Login));
-
 
             }
             return View(model);

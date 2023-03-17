@@ -3,64 +3,102 @@
 @{
     ViewData["Title"] = "Usuarios";
 }
-<h2>Perfil</h2>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Nombre de Usuario
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellidos)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Apellidos)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class="col-sm-2">
-            Teléfono
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
 
-        @if (User.IsInRole("Bodeguero"))
-        {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.NombreBodega)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.NombreBodega)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cif)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cif)
-            </dd>
-        }
-    </dl>
-</div>
-<div>
-    <a class="btn btn-primary" asp-controller="Account" asp-action="AccountEdit" asp-route-id="@Model.Id">Editar</a>
-</div>
+
+    <div class="row">
+        <div class="col-xl-4 col-md-4 col-sm-12 profile-card">
+            <h2 class="name-title">@Model.UserName</h2>
+        <div class="profile-image-container">
+            <img src="@ViewBag.ProfileImage" class="profile-image" alt="imagen de perfil"/>
+            </div>
+            
+        </div>
+
+        <div class="col-xl-8 col-md-8 col-sm-12 mt-5">
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    Nombre de Usuario
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.UserName)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.Nombre)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    @Html.DisplayNameFor(model => model.Apellidos)
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.Apellidos)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    @Html.DisplayNameFor(model => model.Email)
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.Email)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.Direccion)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            <div class="flex-container">
+                <div class="col-xl-3 col-md-6 bold-text">
+                    Teléfono
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </div>
+            </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+
+            @if (User.IsInRole("Bodeguero"))
+            {
+                <div class="flex-container">
+                    <div class="col-xl-3 col-md-6 bold-text">
+                        @Html.DisplayNameFor(model => model.NombreBodega)
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        @Html.DisplayFor(model => model.NombreBodega)
+                    </div>
+                </div>
+                <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+                <div class="flex-container">
+                    <div class="col-xl-3 col-md-6 bold-text">
+                        @Html.DisplayNameFor(model => model.Cif)
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        @Html.DisplayFor(model => model.Cif)
+                    </div>
+                </div>
+            <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+            }
+        <div class="mt-2">
+            <a class="btn custom-btn-primary" asp-controller="Account" asp-action="AccountEdit" asp-route-id="@Model.Id">Editar</a>
+        </div>
+        </div>
+
+    </div>
+
+
+@section Styles {
+    <link href="~/css/Images.css" rel="stylesheet" />
+}

@@ -1,68 +1,35 @@
-﻿@model IEnumerable<Vinoteca.Models.Vino>
+﻿@model IEnumerable<Vino>
 
 @{
     ViewData["Title"] = "Catálogo";
 }
 
-<h1>Catálogo</h1>
+<h1 class="main-title">Catálogo</h1>
+
+<hr class="main-hr" />
+<div class="catalog-container">
+    @foreach(var vino in Model)
+    {
+        <div class="item-container">
+            <a asp-action="Details" asp-route-id="@vino.ID">
+            <div class="image-container">
+                <image class="image" alt="Imagen vino" src="@Url.Content(vino.VinoPath)" />
+            </div>
+            <div class="container-info">
+                <p class="vino-name-text">@Html.DisplayName(vino.Nombre)</p>
+                <p class="denominacion-text">@Html.DisplayName(vino.DenominacionOrigen.Denominacion)</p>
+                <p class="price">@Html.DisplayName(vino.Precio.ToString()) €</p>
+            </div>
+            </a>
+            <button class="btn custom-btn-primary">Comprar</button>
+        </div>
+
+    }
+</div>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DenominacionOrigen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoVino)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Anada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EdadVino)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Alcohol)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DenominacionOrigen.Denominacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoVino)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Anada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EdadVino)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Alcohol)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Precio) €
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ID">Detalle</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/css/catalog.css">
+         }
+

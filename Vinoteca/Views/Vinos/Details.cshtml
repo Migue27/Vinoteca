@@ -2,81 +2,162 @@
 @inject ApplicationDbContext context
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Html.DisplayFor(model => model.Nombre);
 }
 
-<div>
-    <h4>Vino</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DenominacionOrigen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DenominacionOrigen.Denominacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoVino)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoVino)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Anada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Anada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EdadVino)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EdadVino)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alcohol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alcohol)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Azucar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Azucar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unidades)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Unidades)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio) €
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
+
+
+<div class="row">
+    <div class="col-xl-4 col-md-4 col-sm-12 profile-card mt-5">
+        <div class="image-container-vino mb-3">
+            <img src="@Url.Content("~/Images/"+Model.VinoPath)" class="image-vino" alt="imagen vino" />
+        </div>
+
+    </div>
+
+    <div class="col-xl-8 col-md-8 col-sm-12 mt-5">
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                @Html.DisplayNameFor(m => m.Nombre)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                @Html.DisplayFor(m=>m.Nombre)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                @Html.DisplayNameFor(model => model.DenominacionOrigen)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                @Html.DisplayFor(model => model.DenominacionOrigen.Denominacion)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                 @Html.DisplayNameFor(model => model.TipoVino)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                 @Html.DisplayFor(model => model.TipoVino)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                 @Html.DisplayNameFor(model => model.Anada)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                @Html.DisplayFor(model => model.Anada)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                @Html.DisplayNameFor(model => model.EdadVino)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                 @Html.DisplayFor(model => model.EdadVino)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                 @Html.DisplayNameFor(model => model.Alcohol)
+            </div>
+            <div class="col-xl-4 col-md-6">
+               @Html.DisplayFor(model => model.Alcohol)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                 @Html.DisplayNameFor(model => model.Color)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                 @Html.DisplayFor(model => model.Color)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                 @Html.DisplayNameFor(model => model.Azucar)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                 @Html.DisplayFor(model => model.Azucar)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                  @Html.DisplayNameFor(model => model.Unidades)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                @Html.DisplayFor(model => model.Unidades)
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                  @Html.DisplayNameFor(model => model.Precio)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                @Html.DisplayFor(model => model.Precio) €
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </div>
+            <div class="col-xl-4 col-md-6">
+                 @Html.DisplayFor(model => model.Descripcion) 
+            </div>
+        </div>
+        <hr class="col-xl-7 col-md12 no-margin-hr purple-hr" />
+        <div class="flex-container">
+            <div class="col-xl-3 col-md-6 bold-text">
+                <button class="btn custom-btn-primary"><i class="fas fa-shopping-cart mr-1"></i>   Comprar</button>
+
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="input-group">
+                    <button type="button" class="btn custom-btn-secondary input-group-addon minus-btn">-</button>
+                    <input type="number" class="form-control form-control-number quantity-input" value="1">
+                    <button type="button" class="btn custom-btn-secondary input-group-addon plus-btn">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" class="custom-anchor ml-5 mt-3">Volver</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Index">Volver</a>
-</div>
+
+
+@section Styles {
+    @*<link rel="stylesheet" type="text/css" href="~/css/catalog.css">*@
+    <link rel="stylesheet" type="text/css" href="~/css/Images.css">
+     }
+     @section Scripts{
+    <script src="~/js/jquery/dist/jquery.js"></script><!-- jQuery is required -->
+<script>
+        
+        $(document).ready(function () {
+            $(".minus-btn").click(function () {
+                var value = $(".quantity-input").val();
+                if (value > 1) {
+                    value--;
+                }
+                $(".quantity-input").val(value);
+            });
+
+            $(".plus-btn").click(function () {
+                console.log("suma");
+                var value = $(".quantity-input").val();
+                value++;
+                $(".quantity-input").val(value);
+            });
+        });
+</script>
+}

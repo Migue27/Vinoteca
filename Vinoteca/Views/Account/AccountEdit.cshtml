@@ -1,65 +1,196 @@
-﻿@model ApplicationUser
-
+﻿@model Vinoteca.ViewModels.EditUserViewModel
 
 @{
     ViewData["Title"] = "Editar";
 }
 
-<h1>Editar Perfil</h1>
+<h1 class="main-title">Editar Perfil</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AccountEdit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
-                <input asp-for="Apellidos" class="form-control" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <textarea asp-for="Direccion" class="form-control"></textarea>
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Teléfono</label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+<hr class="main-hr" />
+<div class="container-fluid">
+
+    <form asp-action="AccountEdit" enctype="multipart/form-data" id="form-to-submit">
+        <div class="row">
+            <div class="col-xl-4 col-md-4 col-sm-12 profile-card mt-5">
+                <div id="img-container" class="profile-image-container">
+                    <img id="image-preview" class="profile-image" src="@ViewBag.ProfileImage" alt="your image" style="max-width:100%" />
+                    @*<canvas id="canvas-image" width="0" height="0"> Tu navegador no soporta la etiqueta canvas de HTML5</canvas>*@
+                </div>
+                <div class="form-group mt-3 d-flex justify-content-center">
+
+                    @*<input id="crop-image" type="button" value="Cortar imagen" class="btn btn-secondary p-2 cursor-pointer" onclick="cropImage()" hidden />
+                    <input type="file" asp-for="ImageProfile" hidden />*@
+
+                    <label for="ImageProfile" class="btn custom-btn-secondary cursor-pointer">Imagen de perfil</label>
+                    <input asp-for="ImageProfile" type="file" accept="image/png, image/jpeg" class="d-none form-control" />
+
+                </div>
+                <span asp-validation-for="ImageProfile" class="text-danger"></span>
             </div>
 
-            @if (User.IsInRole("Bodeguero"))
-            {<div class="form-group">
-                    <label asp-for="NombreBodega" class="control-label"></label>
-                    <input asp-for="NombreBodega" class="form-control"/>
-                    <span asp-validation-for="NombreBodega" class="text-danger"></span>
+
+            <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Cif" class="control-label"></label>
-                    <input asp-for="Cif" class="form-control" />
-                    <span asp-validation-for="Cif" class="text-danger"></span>
+                    <label asp-for="Apellidos" class="control-label"></label>
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Direccion" class="control-label"></label>
+                    <textarea asp-for="Direccion" class="form-control"></textarea>
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Teléfono</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                @*TODO js function to preview image style*@
 
-            }
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+
+                @if (User.IsInRole("Bodeguero"))
+                {
+                    <div class="form-group">
+                        <label asp-for="NombreBodega" class="control-label"></label>
+                        <input asp-for="NombreBodega" class="form-control" />
+                        <span asp-validation-for="NombreBodega" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cif" class="control-label">CIF</label>
+                        <input asp-for="Cif" class="form-control" />
+                        <span asp-validation-for="Cif" class="text-danger"></span>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn custom-btn-primary" />
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>*@
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/jquery/dist/jquery.js"></script><!-- jQuery is required -->
+    @*<script src="~/js/cropperjs/dist/cropper.js"></script><!-- Cropper.js is required -->
+    <script src="~/js/jquery-cropper/dist/jquery-cropper.js"></script>*@
+    <script>
+        var profileImage = '@ViewBag.ProfileImage';
+    </script>
+    <script src="~/js/ImagePreview.js"></script>
+
+    @*<script>
+
+        //CROPPER
+        //https://fengyuanchen.github.io/cropperjs/
+        //https://github.com/fengyuanchen/cropperjs/blob/main/README.md
+        //JQUERY CROPPER
+        //https://github.com/fengyuanchen/jquery-cropper
+
+        $(document).ready(()=>{
+            if(@ViewBag.ProfileImage.Length > 0){
+                 $("#image-preview").removeAttr("hidden");
+                $("#img-container").removeAttr("hidden");
+                $("#image-preview").attr("src", '@ViewBag.ProfileImage');
+            }
+        })
+
+
+        $("#ImageProfile").change(evt => {
+
+
+            const [file] = document.getElementById("ImageProfile").files
+
+            if (file) {
+                //$("#canvas-image").attr("hidden");
+                //$("#crop-image").removeAttr("hidden");
+                $("#image-preview").removeAttr("hidden");
+                $("#img-container").removeAttr("hidden");
+                $("#image-preview").removeAttr("src").attr("src", URL.createObjectURL(file));
+
+                var $image = $("#image-preview");
+                
+                //To refresh img when src changes destroy before initialization
+                //$("#image-preview").cropper("destroy");
+
+
+                //$image.cropper({
+                //    aspectRatio: 1 / 1,
+                //})
+
+                //var cropper = $image.data('cropper');
+
+                //cropper.setDragMode("move");
+            }
+        });
+        function cropImage() {
+            //$("#canvas-image").removeAttr("hidden");
+            //$("#crop-image").attr("hidden");
+
+            var cropper = $("#image-preview").data("cropper");
+            var croppedCanvas = cropper.getCroppedCanvas({
+                width: 500,
+                height: 500,
+            });
+            $("#image-preview").cropper("destroy").attr("src", croppedCanvas.toDataURL());
+
+            //To send to server image must be converted to file
+            var file = dataURLtoFile(croppedCanvas.toDataURL(), "image.png");
+            console.log(file);
+            $("#ImageProfile").val([file]);
+            //$("#ImageProfile").prop("files", file);
+
+            //cropperjs doc to send image to server :s
+            //https://fengyuanchen.github.io/cropperjs/examples/upload-cropped-image-to-server.html
+            //https://github.com/fengyuanchen/cropperjs/blob/main/docs/examples/upload-cropped-image-to-server.html
+
+            //https://learn.microsoft.com/es-es/aspnet/core/mvc/models/file-uploads?view=aspnetcore-7.0
+            //Mirar si es cuestión de cómo se recibe la información en el controlador porque parece que con val() sí tiene información ImageProfile
+            //Si no intentar enviar con FormData siguiendo la documentación de cropperjs
+
+            console.log("se ejecuta cropImage");
+            console.log($("#ImageProfile"));
+        }
+
+
+        function dataURLtoFile(dataurl, filename) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, { type: mime });
+        }
+
+        function removeImage() {
+
+        }
+
+    </script>*@
 }
+
+    @section Styles {
+    <link href="~/css/Images.css" rel="stylesheet" />
+}
+
+    
+
+
+

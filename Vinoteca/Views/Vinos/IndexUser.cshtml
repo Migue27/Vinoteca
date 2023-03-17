@@ -4,65 +4,65 @@
     ViewData["Title"] = "Vinos a la venta";
 }
 
-<h1>Vinos a la venta</h1>
+<h1 class="main-title">Vinos a la venta</h1>
+<hr class="main-hr" />
 
-
-<table class="table">
+<table class="table mt-5">
     <thead>
         <tr>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.DenominacionOrigen)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.TipoVino)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.EdadVino)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.Alcohol)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.Color)
             </th>
-            <th>
+            <th class="bold-text">
                 @Html.DisplayNameFor(model => model.Precio)
             </th>
-            <th></th>
+            <th class="buttons-container-td"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DenominacionOrigen.Denominacion)
                 </td>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.TipoVino)
                 </td>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.EdadVino)
                 </td>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.Alcohol)
                 </td>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.Color)
                 </td>
-                <td>
+                <td class="text">
                     @Html.DisplayFor(modelItem => item.Precio) €
                 </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> |
-                    <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                <td class="buttons-container-td">
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn custom-btn-primary-special">Detalle</a>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn custom-btn-primary-special">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn custom-btn-primary-special">Eliminar</a>
                 </td>
             </tr>
         }

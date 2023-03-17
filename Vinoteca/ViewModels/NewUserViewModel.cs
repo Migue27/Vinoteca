@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Vinoteca.Models;
 
 namespace Vinoteca.ViewModels
 {
@@ -34,5 +36,7 @@ namespace Vinoteca.ViewModels
         [Compare("Password", ErrorMessage = "Las dos contraseñas introducidas no coinciden.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Imagen")]
+        public IFormFile? ImageProfile { get; set; }
     }
 }

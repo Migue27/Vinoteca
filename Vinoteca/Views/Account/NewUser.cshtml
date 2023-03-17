@@ -2,14 +2,29 @@
 @{
     ViewData["Title"] = "Nueva cuenta";
 }
-<div class="col-md-6 offset-3">
-    <h2>@ViewBag.Title</h2>
-    <br />
+
+<div class="col-xl-4 col-md-6 col-sm-12 login-container">
+<div class="logo-container">
+    <img src="~/images/logo.png" alt="logo" class="logo-image" />
+    </div>
+</div>
     <section id="loginForm">
         <form asp-controller="Account" asp-action="NewUser" asp-antiforgery="true" asp-route-returnurl="@ViewData["ReturnUrl"]"
               method="post" class="form-horizontal">
-            <h4>Nueva cuenta</h4>
-            <hr />
+            <div class="row">
+            <div class="col-xl-4 col-md-4 col-sm-12 profile-card mt-5">
+                <div id="img-container" class="profile-image-container">
+                    <img id="image-preview" class="profile-image" src="~/images/Default_profile_image.png" alt="your image" style="max-width:100%" />
+                </div>
+                <div class="form-group mt-3 d-flex justify-content-center">
+                    <label for="ImageProfile" class="btn custom-btn-secondary cursor-pointer">Imagen de perfil</label>
+                    <input asp-for="ImageProfile" type="file" accept="image/png, image/jpeg" class="d-none form-control" />
+
+                </div>
+                <span asp-validation-for="ImageProfile" class="text-danger"></span>
+            </div>
+
+            <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="User"></label>
@@ -52,10 +67,29 @@
                 <span asp-validation-for="ConfirmPassword"
                       class="text-danger"></span>
             </div>
+            <div class="card-img">
+                <img id="image-preview" src="#" alt="your image" hidden />
+            </div>
+
             <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Crear cuenta</button>
+                <button type="submit" class="btn custom-btn-primary"><i class="fas fa-user-plus"></i> Crear cuenta</button>
+            </div>
+            </div>
             </div>
         </form>
     </section>
-</div>
-@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }
+
+
+@section Styles {
+    <link href="~/css/Images.css" rel="stylesheet" />
+}
+
+
+@section Scripts { 
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } 
+     <script>
+        var profileImage = '@ViewBag.ProfileImage';
+    </script>
+    <script src="~/js/ImagePreview.js"></script>
+
+}

@@ -1,87 +1,131 @@
-﻿@model Vinoteca.Models.Vino
+﻿@model Vinoteca.ViewModels.VinoViewModel
 
 @{
     ViewData["Title"] = "Editar";
 }
 
 
-<h4>Editar Vino</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<h1 class="main-title">Editar Vino</h1>
+<hr class="main-hr" />
+
+<div class="col-md-12 pad-m-left">
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DenominacionOrigenId" class="control-label"></label>
-                <select asp-for="DenominacionOrigenId" class="form-control" asp-items="ViewBag.DenominacionOrigenId"></select>
-                <span asp-validation-for="DenominacionOrigenId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoVino" class="control-label"></label>
-                <select asp-for="TipoVino" class="form-control"></select>
-                <span asp-validation-for="TipoVino" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Anada" class="control-label"></label>
-                <input asp-for="Anada" class="form-control" />
-                <span asp-validation-for="Anada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EdadVino" class="control-label"></label>
-                <select asp-for="EdadVino" class="form-control"></select>
-                <span asp-validation-for="EdadVino" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Alcohol" class="control-label"></label>
-                <input asp-for="Alcohol" class="form-control" />
-                <span asp-validation-for="Alcohol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Azucar" class="control-label"></label>
-                <input asp-for="Azucar" class="form-control" />
-                <span asp-validation-for="Azucar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Unidades" class="control-label"></label>
-                <input asp-for="Unidades" class="form-control" />
-                <span asp-validation-for="Unidades" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="hidden" asp-for="ApplicationUserId" class="form-control" />
+        <div class="row">
+
+            <div class="col-xl-4 col-md-4 col-sm-12 profile-card mt-5">
+                <div id="img-container" class="image-container-vino mb-3">
+                    <img id="image-preview" class="image-vino" src="@Url.Content("~/Images/"+Model.VinoPath)" alt="your image" style="max-width:100%" />
+                </div>
+                <div class="form-group">
+                    <div class="mt-3 d-flex justify-content-center">
+                        <label for="VinoImage" class="btn custom-btn-secondary cursor-pointer">Foto Vino</label>
+                        <input asp-for="VinoImage" type="file" accept="image/png, image/jpeg" class="d-none form-control" />
+                    </div>
+                    <span asp-validation-for="VinoImage" class="text-danger"></span>
+                </div>
 
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label bold-text"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DenominacionOrigen" class="control-label bold-text"></label>
+                    <div class="row">
+                        <div class="col-xl-9 col-s-12">
+                            <select asp-for="DenominacionOrigenId" class="form-control" asp-items="ViewBag.DenominacionOrigenId"></select>
+                        </div>
+                        <div class="col-xl-3 col-s-12">
+                            <input type="button" class="btn custom-btn-primary align-content-end" onclick="location.href='@Url.Action("Create", "DenominacionOrigens" )'" value="Nueva denominación" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoVino" class="control-label bold-text"></label>
+                    <select asp-for="TipoVino" asp-items="Html.GetEnumSelectList<TipoVino>()" class="form-control"></select>
+                    <span asp-validation-for="TipoVino" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Anada" class="control-label bold-text"></label>
+                    <input asp-for="Anada" class="form-control" />
+                    <span asp-validation-for="Anada" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EdadVino" class="control-label bold-text"></label>
+                    <select asp-for="EdadVino" asp-items="Html.GetEnumSelectList<EdadVino>()" class="form-control"></select>
+                    <span asp-validation-for="EdadVino" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Alcohol" class="control-label bold-text"></label>
+                    <input asp-for="Alcohol" class="form-control" />
+                    <span asp-validation-for="Alcohol" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label bold-text"></label>
+                    <input asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Azucar" class="control-label bold-text"></label>
+                    <input asp-for="Azucar" class="form-control" />
+                    <span asp-validation-for="Azucar" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Unidades" class="control-label bold-text"></label>
+                    <input asp-for="Unidades" class="form-control" />
+                    <span asp-validation-for="Unidades" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Precio" class="control-label bold-text"></label>
+                    <input asp-for="Precio" class="form-control" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label bold-text"></label>
+                    <textarea asp-for="Descripcion" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="ApplicationUserId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn custom-btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="IndexUser" class="custom-anchor">Volver</a>
+                </div>
             </div>
+        </div>
+           
         </form>
-    </div>
+    
 </div>
 
-<div>
-    <a asp-action="IndexUser">Volver</a>
-</div>
+@section Styles {
+    @*<link rel="stylesheet" type="text/css" href="~/css/catalog.css">*@
+    <link rel="stylesheet" type="text/css" href="~/css/Images.css">
+     }
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $("#VinoImage").change(evt => {
+            const [file] = document.getElementById("VinoImage").files
+
+            if (file) {
+                $("#image-preview").removeAttr("hidden");
+                $("#img-container").removeAttr("hidden");
+                $("#image-preview").removeAttr("src").attr("src", URL.createObjectURL(file));
+
+            }
+        });
+    </script>
 }
