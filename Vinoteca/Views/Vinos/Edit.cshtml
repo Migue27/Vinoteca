@@ -82,7 +82,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Precio" class="control-label bold-text"></label>
-                    <input asp-for="Precio" class="form-control" />
+                    <input asp-for="Precio" class="form-control" data-val-number="El precio debe ser un número." type="number" step="0.01" />
                     <span asp-validation-for="Precio" class="text-danger"></span>
                 </div>
 

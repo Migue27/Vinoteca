@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using Vinoteca.Models;
+using Vinoteca.Utilities;
 
 namespace Vinoteca.ViewModels
 {
@@ -26,15 +27,14 @@ namespace Vinoteca.ViewModels
         [Display(Name = "Imagen")]
         public IFormFile? ImageProfile { get; set; }
 
-
-
-
         [Display(Name = "Nombre de la bodega")]
-        [Required(ErrorMessage = "Debe introducir el nombre de la bodega")]
-        public string NombreBodega { get; set; }
+        //[RequiredIf("Bodeguero", true)]
+        //[Required(ErrorMessage = "Debe introducir el nombre de la bodega")]
+        public string? NombreBodega { get; set; }
         [Display(Name = "CIF")]
-        [Required(ErrorMessage = "Debe introducir el CIF de facturación")]
-        public string Cif { get; set; }
+        //[RequiredIf("Bodeguero", true)]
+        //[Required(ErrorMessage = "Debe introducir el CIF de facturación")]
+        public string? Cif { get; set; }
 
     }
 }

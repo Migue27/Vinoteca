@@ -273,7 +273,7 @@ namespace Vinoteca.Controllers
                     vinoModel.Unidades = vino.Unidades;
                     vinoModel.Precio = vino.Precio;
                     vinoModel.Descripcion = vino.Descripcion;
-                    vinoModel.ApplicationUser = vino.ApplicationUser;
+                    //vinoModel.ApplicationUser = vino.ApplicationUser;
                     vinoModel.ApplicationUserId = vino.ApplicationUserId;
 
                     //TO SET NEW IMAGE

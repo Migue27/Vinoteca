@@ -10,10 +10,10 @@ namespace Vinoteca.ViewModels
 {
     public class NewUserViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Debe introducir su nombre de usuario.")]
         [Display(Name ="Usuario")]
         public string User { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Debe introducir su email.")]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,})+)$", ErrorMessage = "Debe introducir un email válido")]
         public string Email { get; set; }
 

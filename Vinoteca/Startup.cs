@@ -15,6 +15,9 @@ using Microsoft.Extensions.Hosting;
 using Vinoteca.Models;
 using Vinoteca.Controllers;
 using Microsoft.Extensions.Hosting.Internal;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace Vinoteca
 {
@@ -40,6 +43,15 @@ namespace Vinoteca
 
             //Dependency injection for imageController
             services.AddScoped<ImagesController>();
+
+            services.Configure<RequestLocalizationOptions>(options => 
+            { 
+            var cultureInfo = new CultureInfo("es-ES");
+            cultureInfo.NumberFormat.NumberDecimalSeparator = ",";
+            options.DefaultRequestCulture = new RequestCulture(cultureInfo);
+            options.SupportedCultures = new List<CultureInfo> { cultureInfo };
+            options.SupportedUICultures = new List<CultureInfo> { cultureInfo };
+            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -89,6 +101,13 @@ namespace Vinoteca
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //TO USE COMA LIKE DECIMAL SEPARATOR
+            //var cultureInfo = new CultureInfo("es-ES");
+            //cultureInfo.NumberFormat.NumberDecimalSeparator = ",";
+            //cultureInfo.NumberFormat.NumberGroupSeparator = ".";
+            //CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            //CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             app.UseEndpoints(endpoints =>
             {

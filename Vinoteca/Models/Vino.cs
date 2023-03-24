@@ -26,6 +26,7 @@ namespace Vinoteca.Models
         public TipoVino TipoVino { get; set; }
         [Display(Name = "Añada")]
         [Range(1800, 2023)]
+        [Required(ErrorMessage = "Introduzca la añada del vino")]
         public int Anada { get; set; }
         [Display(Name = "Edad del vino")]
         [Required(ErrorMessage ="Seleccione la edad del vino")]
@@ -46,7 +47,8 @@ namespace Vinoteca.Models
         [Range(0,10000000, ErrorMessage ="El número de botellas debe ser un valor positivo hasta 10.000.000")]
         public int Unidades { get; set; }
         [Required(ErrorMessage ="Introduzca el precio unitario")]
-        [RegularExpression(@"^[0-9]+.?\d{0,2}$", ErrorMessage ="El precio debe tener solo 2 decimales")]
+        //@"^[0-9]+.?\d{0,2}$"
+        [RegularExpression(@"^\d+(,\d{1,2})?$", ErrorMessage ="El precio debe tener solo 2 decimales")]
         [Range(0 , 999999.99, ErrorMessage ="El precio debe ser un valor entre 0 y 1.000.000 €")]
         [Column(TypeName = "decimal(8,2)")]
         public decimal Precio { get; set; }

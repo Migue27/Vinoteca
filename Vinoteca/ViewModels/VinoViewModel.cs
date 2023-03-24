@@ -41,7 +41,8 @@ namespace Vinoteca.ViewModels
         [EnumDataType(typeof(TipoVino))]
         public TipoVino TipoVino { get; set; }
         [Display(Name = "Añada")]
-        [Range(1800, 2021)]
+        [Required(ErrorMessage = "Introduzca la añada del vino")]
+        [Range(1800, 2023)]
         public int Anada { get; set; }
         [Display(Name = "Edad del vino")]
         [Required(ErrorMessage = "Seleccione la edad del vino")]
